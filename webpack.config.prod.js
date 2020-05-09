@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const commonConfig = require("./webpack.config.common");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const ImageminPlugin = require("imagemin-webpack-plugin").default;
 
 module.exports = merge(commonConfig, {
   mode: "production",
@@ -14,14 +15,14 @@ module.exports = merge(commonConfig, {
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(png|jp(e*)g|svg)$/,
         use: [
-          "file-loader",
           {
-            loader: "image-webpack-loader",
+            loader: "url-loader",
             options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
+              limit: 8000,
+              name: "images/[hash]-[name].[ext]",
+              publicPath: "assets",
             },
           },
         ],
@@ -31,6 +32,12 @@ module.exports = merge(commonConfig, {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
+    }),
+    new ImageminPlugin({
+      disable: false,
+      pngquant: {
+        quality: [0.3, 0.5],
+      },
     }),
   ],
   optimization: {
