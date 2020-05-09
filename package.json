@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate",
+  "name": "@hannahmblair/boilerplate",
   "version": "1.0.0",
   "description": "A boilerplate for web projects",
   "main": "index.js",
@@ -7,9 +7,10 @@
     "build": "webpack --config=webpack.config.prod.js",
     "build-dev": "webpack --config=webpack.config.dev.js",
     "start": "webpack-dev-server --config=webpack.config.dev.js --open",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write \"src/**/*.js\""
   },
-  "author": "",
+  "author": "Hannah Blair",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.9.6",
@@ -30,6 +31,12 @@
     "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.0.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "2.0.5",
     "webpack-cli": "^3.3.11"
   }
 }
